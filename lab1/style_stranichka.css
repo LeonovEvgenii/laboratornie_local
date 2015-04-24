@@ -1,0 +1,35 @@
+header{
+	display: block;
+	background: #1E90FF;
+	height: 50px;
+	width: auto;
+}
+
+.text{
+	text-align: center;
+	font-size: 20px;
+}
+
+nav{
+	position: absolute;
+	background: #FFA500;
+	height: 300px;
+	width: 200px;
+	margin: 10px auto auto 0px;
+}
+
+article{
+	background:#9ACD32;
+	height: 300px;
+	width: auto;
+	margin: 10px auto auto 210px;
+}
+
+footer{
+	display: block;
+	background: #FF0000;
+	height: 50px;
+	width: auto;	
+	margin: 10px auto auto auto;
+}
+
