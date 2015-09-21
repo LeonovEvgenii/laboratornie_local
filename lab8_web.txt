@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>web - страничка</title>
+<link rel="stylesheet" href="style_stranichka.css">
+</head>
+<body>
+
+	<header class="warn">
+
+		<div class="zag" >Чертежи</div>	
+
+	</header>
+
+	<nav>
+	
+		<div class="zag" >Навигация</div>
+		<li>
+			<a href="http://web/vid1_stranichka.php">К оглавлению</a>
+		</li>		
+
+		<div class="zag" >Регистрация</div>
+		<form action="http://web/server.php" method="post">
+				Email
+				<br>
+					<input name="email" type="email" size="21" placeholder="name@email.com" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" >
+					<!--required-->
+				<br>			
+				Логин
+				<br>
+					<input name="login"type="text" size="21" pattern="[a-zA-Z0-9]+" title="комбинации букв английского алфавита и цифр">
+				<br>
+				Телефон
+				<br>
+					<input name="telefon" type="tel" size="21" placeholder="xxxx-xxx-xxxx" pattern="^\d{4}-\d{3}-\d{4}$">
+					<!--pattern="(\+?\d[- .]*){7,13}" title="Международный, государственный или местный телефонный номер">-->
+				<br>			
+				Пароль
+				<br>
+					<input name="parol" type="password" size="21" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+							title="Не менее восьми символов, содержащих хотя бы одну цифру и символы из верхнего и нижнего регистра">
+				<br>			
+				Возраст
+				<br>
+					<input name="vozrast" type="number" min="1" max="200">
+				<br>			
+			<br>		
+			<div class="reg">
+				<input type="submit" name="reg_sub" value="Регистрация" />
+			</div>
+		</form>
+	</nav>
+	
+	<article>
+		
+		<div class="zag" >Содержание</div>
+			<li>
+				<a href="http://web/controller.php?spisok=1">Список чертежей</a>
+			</li>
+			<li>
+				<a href="http://web/controller.php?id=1">Чертеж подробнее</a>
+			</li>
+
+			<script type="text/javascript" src="jquery.min.js"></script>
+
+				<script type="text/javascript">   
+					$(document).ready(function(){
+
+						$("#button1").click(function(){
+
+						 $("#status").load("ajax.php","name="+$("#name").val()+"&email="+$("#email").val()+"&text="+$("#text").val()); /* Так мы собираем данные из форм и сразу отправляем! */
+
+						})
+
+					});             
+				</script>
+             
+			
+			<p id="status"></p>
+			Ваше имя
+			<input id="name" name="name">
+			Ваш email
+			<input id="email" name="email">
+			<p>Cообщение
+			<p><textarea rows="5" id="text" name="text"></textarea></p>
+			<input id="button1" type="button" value="Отправить пожелание" />
+
+	</article>
+
+	<footer>
+ 
+		<div class="zag" >Информация</div>
+ 
+	</footer>
+
+</body>
+
+</html>
+
+
+
+
+
+
+<?php
+if (isset($_REQUEST['name'])) 
+{ 
+	$name = stripslashes($_REQUEST['name']); 
+	if ($name == '')
+	{
+		unset($name);
+	} 
+} 
+
+if (isset($_REQUEST['email'])) 
+{ 
+	$email = stripslashes($_REQUEST['email']); if ($email == '')
+	{ 
+		unset($email);
+	} 
+}
+
+if (isset($_REQUEST['text'])) 
+{ 
+	$text = stripslashes(nl2br($_REQUEST['text'])); 
+	if ($text == '') 
+	{ 
+		unset($text);
+	}
+ }
+
+echo "$name, cпасибо за обращение!Ваще сообщение принято!";
+?>
