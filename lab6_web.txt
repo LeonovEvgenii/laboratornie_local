@@ -1,0 +1,21 @@
+<?php
+
+require_once 'model1_cherteg.php';
+
+if($_SERVER['REQUEST_METHOD'] == 'GET') {
+    	
+	if(!empty($_GET["spisok"]))
+	{
+		$cherteg = new Cherteg("", "", "", "", "");			
+		$arr = $cherteg->bd_function_spisok();	
+		
+		require_once 'vid2_spisok.php';
+	}
+	if(!empty($_GET["id"]))
+	{
+		$cherteg = new Cherteg("", "", "", "", "");			
+		$cherteg->bd_function($_GET["id"]);
+		require_once 'vid3_cherteg.php';
+	}	
+}
+?>
