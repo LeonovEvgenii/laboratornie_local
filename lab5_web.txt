@@ -1,0 +1,116 @@
+<?php
+
+require_once 'model2_bd.php';
+
+class Cherteg
+{
+var $name;
+var $material;
+var $scale;
+var $format;
+var $path;
+
+function __construct($name1, $material1, $scale1, $format1, $path1)
+{
+	$this->name = $name1;
+	$this->material = $material1;
+	$this->scale = $scale1;
+	$this->format = $format1;
+	$this->path = $path1;
+}
+
+public function get_name()
+	{
+		return $this->name;
+	}
+public function get_material()
+	{
+		return $this->material;
+	}
+public function get_scale()
+	{
+		return $this->scale;
+	}
+public function get_format()
+	{
+		return $this->format;
+	}
+public function get_path()
+	{
+		return $this->path;
+	}
+///////////////////////////////////////	
+public function set_name($val_name)
+	{
+		return $this->name = $val_name;
+	}
+public function bd_function($id)
+{
+	$query = "SELECT * FROM `tabl1` WHERE  `tabl1`.`id` =".$id.";";
+
+	$bd = new Bd();
+	$bd->connect_bd();
+	$res2 = $bd->zapros($query);
+	while($row = mysql_fetch_array($res2))
+		{
+			$this->name = $row['name'];
+			$this->material = $row['material'];
+			$this->scale = $row['scale'];
+			$this->format = $row['format'];
+			$this->path = $row['path'];
+			
+			//echo $row['name']."<br>";
+			//echo $row['material']."<br>";
+			//echo $row['scale']."<br>";
+			//echo $row['format']."<br>";			
+			//echo "<img style=\"height: 425px;\" src=\"".$row['path']."\">";
+			break;			
+		}
+	$bd->close();
+}
+public function bd_function_spisok()
+{
+	
+	$arr2 = array();
+	
+	$bd = new Bd();
+	$bd->connect_bd();
+	$res2 = $bd->zapros("SELECT name FROM `tabl1`");
+	
+	while($row = mysql_fetch_array($res2)){	
+			$arr2[]->name=$row['name'];
+	}	
+	
+	return $arr2;
+}
+}		
+?>
+
+
+
+
+
+<?php
+
+class Bd
+{
+
+var $bd;
+
+function connect_bd()
+{
+	$this->bd = mysql_connect("localhost","root","") or die("MySQL сервер недоступен!".mysql_error()); /*Подключение к серверу */
+	mysql_select_db("mvc", 	$this->bd) or die("Нет соединения с БД".mysql_error());
+}
+function zapros($query)
+{
+	$res = mysql_query($query);	
+	return $res;
+}
+
+function close()
+{
+	mysql_close($this->bd);
+}
+}
+?>
